@@ -1,0 +1,118 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: "Poppins", sans-serif;
+    overflow: hidden;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+    background-color:black;
+}
+.main{
+    height: 100%;
+    width:100%;
+}
+nav{
+    height: 8%;
+    width: 100%;
+    background-color:blue;
+    color:aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+.menu_icon{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 30px;
+    gap: 20px;
+}
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 30px;
+    gap: 20px;
+}
+.container{
+    height:92%;
+    width: 100%;
+    display: flex;
+}
+.side_bar{
+    height:100%;
+    width:15%;
+    box-shadow: 0 0 6px rgba(255,255,255,0.5);
+}
+.side_bar li {
+    margin-top:6px;
+    padding:14px 20px;
+}
+.side_bar i,a  {
+    color:white;
+    text-decoration: none;
+}
+.side_bar i{
+    padding-right:8px;
+}
+.side_bar li:hover{
+    box-shadow: 0 0 4px rgba(255,255,255,0.5);
+}
+.price-box{
+    height:100%;
+    width:85%;
+}
+.price-box h1{
+    color: aliceblue;
+    text-align: center;
+    margin-top: 10px;
+    padding-top:20px ;
+}
+.Pricing_detail{
+    display:flex;
+    justify-content:space-evenly;
+    margin-top: 100px;
+}
+.incom_detail{
+    height:250px;
+    color:black;
+    width:300px;
+    background-color:rgb(184, 181, 181);
+    border-radius: 20px;
+    text-align: center;
+    padding-top:20px;
+}
+.incom_detail h2,p{
+    padding: 10px;
+}
+.incom_detail button{
+    width:150px;
+    background-color: rgb(133, 133, 235);
+    color: white;
+    height:40px;
+    border-radius: 15px;
+    border:2px solid black;
+}
+.expense_detail{
+    height:250px;
+    color:black;
+    width:300px;
+    background-color:rgb(184, 181, 181);
+    border-radius: 20px;
+    text-align: center;
+    padding-top:20px;
+}
+.expense_detail h2{
+    padding: 50px;
+}
+.expense_detail button{
+    width:200px;
+    background-color: rgb(133, 133, 235);
+    color: white;
+    height:40px;
+    border-radius: 15px;
+    border:2px solid black;
+}
