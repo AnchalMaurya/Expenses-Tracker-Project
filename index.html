@@ -1,48 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- head -->
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Expense Tracker</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expense Tracker App - 💰 BudgetBuddy</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<!-- body -->
 <body>
-<div class="container">
-    <h1>Expense Tracker App</h1><br>
-    <form id="expense-form">
-        <label for="text"><b>Description : </b></label>
-        <input type="text" id="desc" placeholder="Description"  />
-        <br>
-        <label for="text"><b>Amount :</b></label>
-        <input type="number" id="amount" placeholder="Amount" />
-        <br>
-        <label for="text"><b>Category :</b></label>
-        <select id="category">
-            <option disabled selected>Select Category</option>
-            <option>Food</option>
-            <option>Travelling</option>
-            <option>Shopping</option>
-            <option>Roomrent</option>
-            <option>Basic need</option>
-            <option>Other</option>
+  <!-- Header -->
+  <header>
+    <h1>💰 BudgetBuddy</h1>
+    <nav>
+      <button class="nav-btn active" data-section="home">Home</button>
+      <!-- <button class="nav-btn" data-section="transaction-history">Transaction</button>
+      <button class="nav-btn" data-section="charts">Charts</button> -->
+      <button class="nav-btn" id="addIncomeBtn">➕ Income</button>
+      <button class="nav-btn" id="addExpenseBtn">➖ Expense</button>
+    </nav>
+  </header>
+  <!-- Main -->
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="active-section">
+      <!-- hero section -->
+      <div id="hero">
+        <h2>Track Your Money Smarter</h2>
+        <p>Manage income, expenses & financial goals.</p>
+      </div>
+      <!-- cards -->
+      <div id="overview">
+        <div class="card" style="background: rgb(99, 138, 214);">
+          <h3><i class="fa-solid fa-wallet"></i>Total Income</h3>
+          <p id="total-income">₹ 0</p>
+        </div>
+
+        <div class="card" style="background: rgb(228, 162, 92);">
+          <h3><i class="fa-solid fa-receipt"></i> Total Expenses</h3>
+          <p id="total-expenses">₹ 0</p>
+        </div>
+
+        <div class="card balance">
+          <h3><i class="fa-solid fa-scale-balanced"></i> Remaining Balance</h3>
+          <p id="balance">₹ 0</p>
+        </div>
+
+        <div class="card" style="background: rgb(193, 102, 226);">
+          <h3><i class="fa-solid fa-calendar-week"></i> Weekly Average</h3>
+          <p id="weekly-average">₹ 0</p>
+        </div>
+      </div>
+    </section>
+    <!-- Transaction Section -->
+    <section id="transaction-history">
+      <h2 style="text-align: center;margin: 18px;">🕘 Transaction History</h2>
+      <!--Filters-->
+      <section id="filters">
+        <input type="text" id="search" placeholder="Search transactions..." />
+        <button data-filter="all">All  Transactions</button>
+        <button data-filter="income">Income</button>
+        <button data-filter="expense">Expense</button>
+      </section>
+      <!-- Transaction lists -->
+      <ul id="list"></ul>
+    </section>
+    <!-- Charts -->
+    <section id="charts" class="active-section">
+      <h2 style="text-align: center; margin: 18px;">📊 Visual Reports</h2>
+      <div class="chart-cards">
+        <!-- Weekly Spending Card -->
+        <div class="chart-card">
+          <h3>📆 Weekly Spending</h3>
+          <p>Last 7 days Trend</p>
+          <canvas id="weeklyChart"></canvas>
+        </div>
+        <!-- Category Distribution Card -->
+        <div class="chart-card">
+          <h3>📂 Category Distribution</h3>
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- MODALS -->
+  <!-- Add Income Modal -->
+  <div class="modal" id="incomeModal">
+    <div class="modal-content">
+      <h2 style="color:white;text-align: center;margin-bottom: 8px;">Add Income</h2>
+      <form id="incomeForm">
+        <input type="text" id="incomeTitle" placeholder="Title" required>
+        <input type="number" id="incomeAmount" placeholder="Amount" required>
+        <input type="date" id="incomeDate" required>
+        <button type="submit" class="close" style="background: rgb(49, 83, 250);">Add Income</button>
+        <button type="button" class="close" data-close="incomeModal">Close</button>
+      </form>
+    </div>
+  </div>
+  <!-- Add Expense Modal -->
+  <div class="modal" id="expenseModal">
+    <div class="modal-content">
+      <h2 style="color:white;text-align: center;margin-bottom: 8px;">Add Expense</h2>
+      <form id="expenseForm">
+        <input type="text" id="expenseTitle" placeholder="Expense Title" required>
+        <input type="number" id="expenseAmount" placeholder="Amount" required>
+        <input type="date" id="expenseDate" required>
+        <select id="expenseCategory">
+          <option disabled selected>Select Expense Type</option>
+          <option>Food</option>
+          <option>Bills</option>
+          <option>Shopping</option>
+          <option>Travel</option>
+          <option>Other</option>
         </select>
-    <br>
-    <button type="submit">Submit</button>
-    </form>
-    <table id="expense-table">
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-    <div class="total">Total Expenses: Rs. <span id="total">0</span></div>
-</div>
-<script src="script.js"></script>
+        <button type="submit" class="close" style="background: rgb(49, 83, 250);">Add Expense</button>
+        <button type="button" class="close" data-close="expenseModal">Close</button>
+      </form>
+    </div>
+  </div>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <h2>We love ❤️ BudgetBuddy</h2>
+      <p>© 2025. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#transaction-history">Transaction History</a>
+        <a href="#reports">Visual Reports</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://github.com/AnchalMaurya"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/maurya-aanchal/"><i class="fab fa-linkedin"></i></a>
+        <a href="https://app.netlify.com/teams/tech-titans-8ez8-5w/projects"><i class="fas fa-cloud"></i></a>
+      </div>
+      <p class="tagline">Built with passion to make your finances easier💰</p>
+    </div>
+  </footer>
+  <!-- JavaScript Added -->
+  <script src="script.js"></script>
 </body>
 </html>
