@@ -48,6 +48,8 @@ BudgetBuddy
 
 ├─ script.js
 
+├─ bg_image.jpg
+
 ├─ README.md
 
 
